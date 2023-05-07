@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>This is index.html</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.1/socket.io.min.js" integrity="sha512-AI5A3zIoeRSEEX9z3Vyir8NqSMC1pY7r5h2cE+9J6FLsoEmSSGLFaqMQw8SWvoONXogkfFrkQiJfLeHLz3+HOg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<h1>This is from flask application</h1>
+<body>
+<script type = "text/javascript">
+    $(document).ready(function(){
+        var socket = io.connect("http://localhost:5000")
+        socket.on('connect', function(){
+            socket.send("User connected!");
+        });
+
+        socket.on('message',function(data){
+            $('#messages').append($('<p>').text(data));
+        });
+
+        $('#sendButton')on('click', function(){
+            socket.send($('#username').val() + ': '+ $('#message').val());
+            $('#message').val('');
+        });
+
+
+    })
+
+</script>
+
+<div id = "messages">
+</div>
+<input type = "text" id="username" placeholder="Username">
+<input type = "text" id="message" placeholder="Message">
+
+<button id="sendButton">Send</button>
+</body>
+</html>
